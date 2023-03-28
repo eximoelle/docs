@@ -142,30 +142,4 @@ zdotdir — навороченный конфиг для zsh от разрабо
 
 #### Установка eximoelle/my-zdotdir
  
-1. Если установили `yc-cli`:
-```
-ZDOTDIR=~/.config/zsh
-git clone --branch yc-cli https://github.com/eximoelle/my-zdotdir $ZDOTDIR
-```
-
-Если не используете `yc-cli`:
-```
-git clone --branch refining https://github.com/eximoelle/my-zdotdir $ZDOTDIR
-```
-
-Ветки отличаются «захардкоженной» загрузкой модуля дополнений для `yc-cli` в `.zshrc`. Когда разберусь, как добиться функционирования дополнений `yc-cli` без этого — ветка `yc-cli` будет смержена в основную.
-
-2. Создание символьной ссылки на `.zshenv` (выполняйте в домашней директории):
-```
-[[ -f ~/.zshenv ]] && mv -f ~/.zshenv ~/.zshenv.bak
-ln -s $ZDOTDIR/.zshenv ~/.zshenv
-```
-
-Если файл `.zshenv` уже существует — сделаем бэкап. Затем установим символьную ссылку.
-
-3. Запуск новой сессии:
-```
-zsh
-```
-
-Либо откройте новое окно терминала.
+Руководствуйтесь инструкцией по установке в репозитории [eximoelle/my-zdotdir](https://github.com/eximoelle/my-zdotdir).
