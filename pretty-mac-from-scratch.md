@@ -136,10 +136,42 @@ zdotdir — навороченный конфиг для zsh от разрабо
 
 Благодаря менеджеру плагинов мы просто указываем в текстовом файле список дополнений для zsh, которые хотим установить, а он сам скачивает их с Github, подключает и обновляет их.
 
-Конфиг от getantidote хорош уже из коробки, но мне хочется использовать тему Powerlevel10k от romkatv и еще кое-какие вещи: neovim вместо vim, exa с иконками вместо ls и т. д. А еще нужно в правильном месте прописать плагины автоподсказок для Yandex Cloud CLI (!TODO).
+Конфиг от getantidote хорош уже из коробки, но мне хочется использовать тему Powerlevel10k от romkatv и еще кое-какие вещи: neovim вместо vim, exa с иконками вместо ls и т. д. А еще нужно в правильном месте прописать плагины автоподсказок для Yandex Cloud CLI.
 
 Для всего этого я сделал свой форк проекта — [eximoelle/my-zdotdir](https://github.com/eximoelle/my-zdotdir).
 
-#### Установка eximoelle/my-zdotdir
+#### Установка eximoelle/my-zdotdir, ветка `refining`
  
-Руководствуйтесь инструкцией по установке в репозитории [eximoelle/my-zdotdir](https://github.com/eximoelle/my-zdotdir).
+Руководствуйтесь инструкцией по установке в ветке `refining` репозитория [eximoelle/my-zdotdir](https://github.com/eximoelle/my-zdotdir/tree/refining#readme).
+
+#### Troubleshooting
+
+##### `.zsh_plugins.zsh:source:40: no such file or directory...`
+
+В последнее время после установки в шелле появляется ошибка, говорящая о недоступности файла, связанного с автоподсказками `yc cli`. Ошибка связана с изменением структуры именования каталогов при работе `homebrew` (?!) Раньше текущая версия установленных программ лежала в папке `latest`, что и отражено в команде на создание символьной ссылки на файл с автоподсказками. Теперь же каталоги именуются по номеру версии. При загрузке скомпилированного Antidote `.zsh_plugins.zsh` оболочка не может найти указанный там плагин и это вызывает ошибку:
+
+```
+/Users/maxlion/.config/zsh/.zsh_plugins.zsh:source:40: no such file or directory: /Users/maxlion/.config/zsh/custom/plugins/yc-cli.completion.plugin.zsh/yc-cli.completion.plugin.zsh.plugin.zsh
+```
+
+Чтобы исправить это, нужно:
+1. Выяснить текущую установленную версию: 
+```
+❯ ls /usr/local/Caskroom/yandex-cloud-cli/ 
+0.102.0 
+```
+
+2. Удалить старую символьную ссылку:
+```
+❯ rm .config/zsh/custom/plugins/yc-cli.completion.plugin.zsh
+```
+
+3. Создать исправленную символьную ссылку (подставить текущую версию из пункта 1):
+```
+❯ ln -s /usr/local/Caskroom/yandex-cloud-cli/0.102.0/yandex-cloud-cli/completion.zsh.inc $ZDOTDIR/custom/plugins/yc-cli.completion.plugin.zsh
+```
+
+4. Удалить скомпилированный `.zsh_plugins.zsh`. Он будет скомпилирован заново при следующем запуске шелла.
+```
+❯ rm .config/zsh/.zsh_plugins.zsh
+```
