@@ -144,7 +144,7 @@ zdotdir — навороченный конфиг для zsh от разрабо
  
 Руководствуйтесь инструкцией по установке в ветке `refining` репозитория [eximoelle/my-zdotdir](https://github.com/eximoelle/my-zdotdir/tree/refining#readme).
 
-#### Troubleshooting
+#### Troubleshooting (Deprecated — см. Readme форка)
 
 ##### `.zsh_plugins.zsh:source:40: no such file or directory...`
 
