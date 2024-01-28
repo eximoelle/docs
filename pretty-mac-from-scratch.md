@@ -134,6 +134,11 @@ brew install font-jetbrains-mono-nerd-font
 
 iTerm 2 предлагает широкие возможности профилирования терминала под разные задачи, приложения и т. д. Но сейчас я захожу в Профили просто чтобы поменять шрифт. Для этого достаточно нажать **⌘ + O** > Edit Profiles... > выбрать профиль Default > Text > в разделе Font выбрать "JetBrainsMono Nerd Font Mono" > установить галочку "Use ligatures".
 ![iterm](pictures/iterm-1.png)
+
+#### Убрать синий значок ▸ в iTerm 2
+
+**Profiles → Edit profiles... → Terminal →** снять галочку **“Show mark indicators”**.
+
 ### Мой форк getantidote/zdotdir
 
 zdotdir — навороченный конфиг для zsh от разработчика менеджера zsh-плагинов Antidote.
